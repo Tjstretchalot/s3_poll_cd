@@ -49,7 +49,9 @@ def poll(s3_bucket: str, s3_key: str):
             return False
         raise e
 
-    os.system('script.sh')
+    cwd = os.getcwd()
+    os.system('bash script.sh')
+    os.chdir(cwd)
     os.unlink('script.sh')
 
     s3.delete_object(Bucket=s3_bucket, Key=s3_key)
